@@ -321,8 +321,6 @@
 
 
 
-        
-
          //Summit Detail
 
          $('.meet-the-sponsors-item').each(function () {
@@ -520,6 +518,57 @@
             $(activeTab).fadeIn();
             return false;
         });
+        
+        
+        var $animation_elements = $('.anim-el');
+        var $window = $(window);
+
+        function check_if_in_view() {
+            var window_height = $window.height();
+            var insetAmount = window_height / 20 // fifth of the screen
+            var window_top_position = $window.scrollTop();
+            var window_bottom_position = (window_top_position + window_height) - insetAmount;
+            $.each($animation_elements, function () {
+                var $element = $(this);
+                var element_height = $element.outerHeight();
+                var element_top_position = $element.offset().top;
+                var element_bottom_position = (element_top_position + element_height);
+                //check to see if this current container is within viewport
+                if (element_top_position <= window_bottom_position) {
+                    $element.addClass('in-view');
+                }
+            });
+        }
+
+        $window.on('scroll orientationchange resize', check_if_in_view);
+        $window.trigger('scroll');
+        const updateProperties = (elem, state) => {
+            elem.style.setProperty('--x', `${state.x}px`)
+            elem.style.setProperty('--y', `${state.y}px`)
+            elem.style.setProperty('--width', `${state.width}px`)
+            elem.style.setProperty('--height', `${state.height}px`)
+            elem.style.setProperty('--radius', state.radius)
+            elem.style.setProperty('--scale', state.scale)
+        }
+
+        $('.summit-details-top-inner ul li a').click(function (e) {
+            e.preventDefault();
+            if ($(window).width() < 769) {
+
+                $('body').removeClass('navShown')
+                $('.nav-wrap').hide(100)
+            }
+            var headerHeight = $('.main-header-section').outerHeight()
+            var target = $($(this).attr('href'));
+            if (target.length) {
+                var scrollTo = target.offset().top - headerHeight;
+                $('body, html').animate({
+                    scrollTop: scrollTo + 'px'
+                }, 800);
+            }
+        });
+        
+        
 
 
         if ($(".registration-form-row-input input[type='number']").length) {

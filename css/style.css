@@ -1803,7 +1803,9 @@ a.btn.large.blue-pigment.has-imaged.img-btn-large span {padding-left: 31px;}
 .summit-speakers-wrap .executive-board-item-thumb picture img{height: 100%; object-fit: cover;}
 .summit-venue-item-inner{float: left; width: 100%; position: relative; min-height: 393px;} 
 
-
+.register-scroll-wrap{float: left; width: 100%; background-color: var(--whisper); padding: 50px 0 100px 0; }
+.register-scroll-wrap .common-wrap{max-width: 1170px;}
+.meet-the-sponsors-wrap{padding-bottom: 0px;}
 
 
 /* New css */
